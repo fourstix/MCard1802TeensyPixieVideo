@@ -31,14 +31,14 @@ Here are some examples running actual [CDP1802 programs](https://github.com/four
   </tr>
   <tr align="center">
     <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Cosmac Elf Spaceship program.</td>
-    <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Tom Pittmann's DMA Test program.</td>
+    <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Tom Pittman's DMA Test program.</td>
   </tr>
   <tr align="center">
    <td>Todo</td> 
    <td>Todo</td>
   </tr>  
   <tr align="center">
-    <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Tom Pittmann's Clock program.</td>
+    <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Tom Pittman's Seconds Clock program.</td>
     <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Text Demo program.</td>
   </tr>
   <tr align="center">
