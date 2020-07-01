@@ -48,7 +48,43 @@ Here are some sample configurations running actual [CDP1802 programs](https://gi
     <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Sprite Demo program.</td>
     <td>1802 Membership card, Teensy 3.2, OLED display and wiring.</td>
   </tr>   
+    <tr align="center">
+     <td colspan="2"><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Schematic.jpg"></td>
+  </tr>
+  <tr align="center">
+     <tdcolspan="2">Hardware Schematic</td>
+  </tr>
 </table>
+
+Notes
+-----
+* **Video Resulton**  
+  * Resolutions of 64 x 64 and 32 x 64 are directly supported.
+  * For 128 x 64 and other resuolutions, video data will be captured at every other DMA request (64 x 64).
+* **Data Lines**  
+  * Data lines from the Membership Card ROM at U2 are latched by a 74LS374 Octal D Flip-flip triggered by TPB.
+  * Latched Data lines connected to the Teensy 3.2 Port D pins (pins 2, 14, 7, 8, 6, 20, 21, 5)
+  * The Teensy 3.2 reads data as a byte in a single instruction from Port D during an 1802 DMA Output cycle.
+* **Video Control**    
+  * The 1802 Instruction Input from Port 1 (1802 Opcode 69) will turn video processing ON.
+  * The 1802 Instruction Output to Port 1 (1802 Opcode 61) will turn video processing OFF.
+  * The /EF1 line will go LOW four lines before a frame begins, and during the last four lines of a frame.
+  * An Interrupt Request will be asserted (/INT = LOW) 29 instruction cycles before the first DMA request
+  * 128 lines of 8 DMA_OUT requests will be asserted per frame.  
+  * This gives 8 bytes of data per line.
+  * Exactly 6 instruction cycles will occur between the DMA requests for each line.
+  * Software for the 1802 that rely on these control timings will work with this simulator. (If not, please open an issue.)
+* **Teensy Interrupt**
+  * A rising signal on TPB triggers an interrupt on the Teensy 3.2.
+  * The Teensy interrupt handler will process the video state machine 
+  * During DMA the interrupt handler will read the video data byte from Port D (pins 2, 14, 7, 8, 6, 20, 21, 5)
+  * Video data is captured every other DMA cycle for 64 x 64 resolution and stored in a Video Buffer
+* **Frame rate and OLED update rate**
+  * After one complete frame of data is captured, the OLED display will be updated.
+  * During the display update, interrupts will continue, but data will not be caputred.
+  * Control signals are maintained during display updates, so that programs will run correctly, even when data is not captured.
+  * The 1802 will see frames requests at rate of about 61/second, but the OLED display will actually be updated about 5 times/second.
+
 
 
 Repository Contents
