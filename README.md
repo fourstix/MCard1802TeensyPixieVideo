@@ -79,9 +79,9 @@ Notes
   * Timing details are documented in the code comments.
 * **Teensy Port 1 Interrupt**
   * A rising signal on N0 (Port 1) triggers an interrupt on the Teensy 3.2 to turn video on or off.
-  * The state of /MRD determines if video is turned off or on.
-  * When /MRD = LOW (INPUT PORT 1, 1802 opcdode 69) turns video on.
-  * If /MRD = HIGH (OUTPUT PORT 1, 1802 opcode 61) turns video off.
+  * Port 1 is used to turn video on or off.
+  * INP 1, 1802 opcdode 69 (N0 = 1, /MRD = HIGH) turns video on.
+  * OUT 1, 1802 opcode 61 (N0 = 1, /MRD = LOW) turns video off.
 * **Teensy TPB Interrupt**  
   * A rising signal on TPB triggers an interrupt on the Teensy 3.2.
   * The Teensy interrupt handler will process the video state machine 
@@ -90,9 +90,9 @@ Notes
   * Video data is captured every other DMA line and stored in a Video Buffer
 * **Frame rate and OLED update rate**
   * After one complete frame of data is captured, the OLED display will be updated.
-  * Any I2C 64 x 128 OLED supported by U8G2 should work.
-  * During the display update, interrupts will continue, but data will not be captured for the frame.
+  * Any I2C 64 x 128 OLED supported by U8G2 should work as a display.
   * If the captured video data does not change, the display will not be updated for that frame.
+  * During the display update, interrupts will continue, but data will not be captured for the frame.
   * Control signals are maintained during the OLED display updates, so that programs will run correctly, even when data is not captured.
   * The 1802 will see frames requests at rate of about 61/second, but the OLED display will actually be updated about 5 times/second.
 
