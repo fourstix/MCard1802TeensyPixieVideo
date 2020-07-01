@@ -53,7 +53,7 @@ Here are some examples running actual [CDP1802 programs](https://github.com/four
      <td colspan="2"><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Schematic.jpg"></td>
   </tr>
   <tr align="center">
-     <tdcolspan="2">Hardware Schematic</td>
+     <td colspan="2">Hardware Schematic</td>
   </tr>
 </table>
 
@@ -61,15 +61,15 @@ Notes
 -----
 * **Video Resulton**  
   * Resolutions of 64 x 64 and 32 x 64 are directly supported.
-  * For 128 x 64 and other resuolutions, video data will be captured on every other DMA request (as 64 x 64 resultion).
+  * For 128 x 64 and other resuolutions, video data will be captured on every other DMA request (as per a 64 x 64 resolution).
 * **Data Lines**  
   * Data lines from the Membership Card ROM at U2 are latched by a 74LS374 Octal D Flip-flip triggered by TPB.
   * The latched Data lines are connected to the Teensy 3.2 Port D pins (pins 2, 14, 7, 8, 6, 20, 21, 5)
   * The Teensy 3.2 reads data as a byte in a single instruction from Port D during an 1802 DMA Output cycle.
   * Full details about Teensy 3.2 pin connections are in the code comments.
 * **Video Control**    
-  * The 1802 Instruction Inp 1 (Input from Port 1,1802 Opcode 69) will turn video processing ON.
-  * The 1802 Instruction Out 1 (Output to Port 1, 1802 Opcode 61) will turn video processing OFF.
+  * The 1802 Instruction INP 1 (Input from Port 1,1802 Opcode 69) will turn video processing ON.
+  * The 1802 Instruction OUT 1 (Output to Port 1, 1802 Opcode 61) will turn video processing OFF.
   * The /EF1 line will go LOW four lines before a frame's DMA requests begin, and during the last four DMA request lines of a frame.
   * An Interrupt Request will be asserted (/INT = LOW) exactly 29 instruction cycles before the first DMA request
   * 128 lines of 8 DMA_OUT requests will be asserted per frame. Each DMA_OUT request takes one instruction cycle.
@@ -79,14 +79,14 @@ Notes
   * Timing details are documented in the code comments.
 * **Teensy Port 1 Interrupt**
   * A rising signal on N0 (Port 1) triggers an interrupt on the Teensy 3.2 to turn video on or off.
-  * Port 1 is used to turn video on or off.
+  * Input and Output to Port 1 is used to turn video on or off.
   * INP 1, 1802 opcdode 69 (N0 = 1, /MRD = HIGH) turns video on.
   * OUT 1, 1802 opcode 61 (N0 = 1, /MRD = LOW) turns video off.
 * **Teensy TPB Interrupt**  
   * A rising signal on TPB triggers an interrupt on the Teensy 3.2.
-  * The Teensy interrupt handler will process the video state machine 
+  * The Teensy interrupt handler will process one cycle in the video state machine 
   * During DMA the interrupt handler will read the video data byte from Port D (pins 2, 14, 7, 8, 6, 20, 21, 5)
-  * There are 8 bytes of video data per line.
+  * There are 8 bytes of video data read per frame line.
   * Video data is captured every other DMA line and stored in a Video Buffer
 * **Frame rate and OLED update rate**
   * After one complete frame of data is captured, the OLED display will be updated.
