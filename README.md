@@ -2,7 +2,7 @@
 Teensy 3.2 based Pixie Video Simulator for the 1802 Membership Card
 
 This code simulates a cdp1861 Pixie Video chip, using a [Teensy 3.2.](https://www.pjrc.com/store/teensy32.html)
-This [simulator](https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/docs/MCard1802TeensyPixieVideo.pdf)
+This [simulator](https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/docs/TeensyPixieVideo.pdf)
 uses a video ram buffer with a 128 x 64 graphics display supported by the
 [U8G2 graphics library](https://github.com/olikraus/u8g2) as a video display.  The code will simulate
 the interrupts, external flag 1 signal, and DMA Output requests from the original pixie video.  This
@@ -18,11 +18,11 @@ U8G2 supports many kinds of 128 x 64 displays.  A list of supported displays is 
 
 
 For example, this [SSD1306 I2C 128 x64 OLED display](https://www.adafruit.com/product/938) available
-from Adadruit works fine with the Qwiic interface and is supported by Uthe 8G2 graphics library.
+from Adadruit works fine with the Teensy 3.2 and is supported by Uthe 8G2 graphics library.
 
 Examples
 ---------------------
-Here are some sample configurations running actual [CDP1802 programs](https://github.com/fourstix/QwiicCosmacElfSim/blob/master/docs/Cdp1802SampleProgramCode.txt).
+Here are some examples running actual [CDP1802 programs](https://github.com/fourstix/QwiicCosmacElfSim/blob/master/docs/Cdp1802SampleProgramCode.txt).
 
 <table class="table table-hover table-striped table-bordered">
   <tr align="center">
@@ -33,6 +33,7 @@ Here are some sample configurations running actual [CDP1802 programs](https://gi
     <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Cosmac Elf Spaceship program.</td>
     <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Tom Pittmann's DMA Test program.</td>
   </tr>
+  <tr align="center">
    <td>Todo</td> 
    <td>Todo</td>
   </tr>  
@@ -60,29 +61,39 @@ Notes
 -----
 * **Video Resulton**  
   * Resolutions of 64 x 64 and 32 x 64 are directly supported.
-  * For 128 x 64 and other resuolutions, video data will be captured at every other DMA request (64 x 64).
+  * For 128 x 64 and other resuolutions, video data will be captured on every other DMA request (as 64 x 64 resultion).
 * **Data Lines**  
   * Data lines from the Membership Card ROM at U2 are latched by a 74LS374 Octal D Flip-flip triggered by TPB.
-  * Latched Data lines connected to the Teensy 3.2 Port D pins (pins 2, 14, 7, 8, 6, 20, 21, 5)
+  * The latched Data lines are connected to the Teensy 3.2 Port D pins (pins 2, 14, 7, 8, 6, 20, 21, 5)
   * The Teensy 3.2 reads data as a byte in a single instruction from Port D during an 1802 DMA Output cycle.
+  * Full details about Teensy 3.2 pin connections are in the code comments.
 * **Video Control**    
-  * The 1802 Instruction Input from Port 1 (1802 Opcode 69) will turn video processing ON.
-  * The 1802 Instruction Output to Port 1 (1802 Opcode 61) will turn video processing OFF.
-  * The /EF1 line will go LOW four lines before a frame begins, and during the last four lines of a frame.
-  * An Interrupt Request will be asserted (/INT = LOW) 29 instruction cycles before the first DMA request
-  * 128 lines of 8 DMA_OUT requests will be asserted per frame.  
-  * This gives 8 bytes of data per line.
-  * Exactly 6 instruction cycles will occur between the DMA requests for each line.
+  * The 1802 Instruction Inp 1 (Input from Port 1,1802 Opcode 69) will turn video processing ON.
+  * The 1802 Instruction Out 1 (Output to Port 1, 1802 Opcode 61) will turn video processing OFF.
+  * The /EF1 line will go LOW four lines before a frame's DMA requests begin, and during the last four DMA request lines of a frame.
+  * An Interrupt Request will be asserted (/INT = LOW) exactly 29 instruction cycles before the first DMA request
+  * 128 lines of 8 DMA_OUT requests will be asserted per frame. Each DMA_OUT request takes one instruction cycle.
+  * Exactly 6 instruction cycles will occur between each line of DMA requests.
+  * There are a minimum of 1882 instruction cycles between frames to simulate the blanking period.
   * Software for the 1802 that rely on these control timings will work with this simulator. (If not, please open an issue.)
-* **Teensy Interrupt**
+  * Timing details are documented in the code comments.
+* **Teensy Port 1 Interrupt**
+  * A rising signal on N0 (Port 1) triggers an interrupt on the Teensy 3.2 to turn video on or off.
+  * The state of /MRD determines if video is turned off or on.
+  * When /MRD = LOW (INPUT PORT 1, 1802 opcdode 69) turns video on.
+  * If /MRD = HIGH (OUTPUT PORT 1, 1802 opcode 61) turns video off.
+* **Teensy TPB Interrupt**  
   * A rising signal on TPB triggers an interrupt on the Teensy 3.2.
   * The Teensy interrupt handler will process the video state machine 
   * During DMA the interrupt handler will read the video data byte from Port D (pins 2, 14, 7, 8, 6, 20, 21, 5)
-  * Video data is captured every other DMA cycle for 64 x 64 resolution and stored in a Video Buffer
+  * There are 8 bytes of video data per line.
+  * Video data is captured every other DMA line and stored in a Video Buffer
 * **Frame rate and OLED update rate**
   * After one complete frame of data is captured, the OLED display will be updated.
-  * During the display update, interrupts will continue, but data will not be caputred.
-  * Control signals are maintained during display updates, so that programs will run correctly, even when data is not captured.
+  * Any I2C 64 x 128 OLED supported by U8G2 should work.
+  * During the display update, interrupts will continue, but data will not be captured for the frame.
+  * If the captured video data does not change, the display will not be updated for that frame.
+  * Control signals are maintained during the OLED display updates, so that programs will run correctly, even when data is not captured.
   * The 1802 will see frames requests at rate of about 61/second, but the OLED display will actually be updated about 5 times/second.
 
 
