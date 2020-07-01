@@ -1,0 +1,952 @@
+All of these program listing are in the form of a hexadecimal address line followed by
+the code in comma separated bytes.  One can enter the code into the 1802 simulator by placing
+it into the load mode, and then cut and pasting each line into the Arduino IDE Serial Monitor text input field and pressing enter.  The bytes will be entered into the processor simulator as if they had been typed in by hand.
+
+All programs below are copyright their respective authors.  These listing are merely to 
+provide a short-cut method of entering the code into the QwiicCosmacElfSim simulator.  The original documentation is available on CosmacElf.com.  These code listings are best used along
+with the original author's text.
+
+Programs from A Short Course in Programming by Tom Pittman
+
+Program 2.1 -- Memory Clear
+0000:
+90,AE,BE,EE,73,30,03#
+
+Program 2.2 - Memory Sequencer
+0000:
+90,AE,BE,EE,8E,73,30,03#
+
+Program 2.3 -- Slow Blink
+0000:
+91,CE,7A,38,7B,11,30,00#
+
+Program 3.1 -- Test Idle
+0000:
+00#
+0001: End
+
+Program 3.2 -- Test SEQ
+0000:
+7B,00#
+0002: End
+
+Program 3.3 -- Test REQ
+0000:
+7A,00#
+0002: End
+
+Program 3.4 -- Test REQ After SEQ
+0000:
+7B,7A,00#
+0003: End
+
+Program 3.5 -- Test B4
+0000:
+7B,37,04,7A,00#
+0005: End
+
+Program 3.6 -- Test B4 Destination
+0000:
+7B,37,12,7A,00,00,00,00#
+0008:
+00,00,00,00,00,00,00,00#
+0010:
+00,00,7A,00,00# 
+0015: End
+
+Program 3.7 -- Test BR
+0000:
+7A,3F,04,7B,30,00#
+0006: End
+
+Program 3.8 -- Test OUT
+0000:
+64,00,3F,00,64,11,30,02#
+0008: End
+
+
+Program 3.9 -- Test INP
+0000:
+3F,00,6C,7B,00,00#
+0006: End
+
+Program 3.10 -- Conditional Branches
+0000:
+37,00,64,03,7B,3F,05,6C,7A,30,7A,64,0C,30,00#
+...
+0030:
+64,31,30,00#
+...
+007A:
+64,7B,30,00#
+007E: End
+
+Program 3.11 -- Test Q Conditionals
+0000:
+7A,6C,7B,C1,00,0A,64,11,30,00,64,33,30,00#
+000E: End
+
+Program 4.1 -- Test PHI and PLO
+0000:
+6C,BE,7A,2E,9E,3A,03,6C,C4,7B,2E,9E,32,0A,30,00#
+0010: End
+
+Program 4.2 -- Test SEX
+0000:
+90,B8,80,A8,3F,04,E8,64,C4,37,09,30,04#
+000D: End
+
+Program 4.3 -- Test LDI
+0000:
+90,B7,F8,33,A7,E7,64,27,3F,08,6C,64,37,0C,30,06#
+0010: End
+
+Program 4.4 -- Test Store
+0000:
+90,B6,B7,F8,33,A6,F8,1E#
+0008:
+A7,3F,09,E6,6C,37,0D,26,57,30,09#
+0023: End
+
+Program 4.5 -- Test Loads
+0000:
+90,B8,B9,F8,80,A8,F8,90,A9,E9,7B,3F,0B,6C,64,7A#
+0010:
+50,C4,29,59,37,14,64,29,88,59,3F,1A,64,89,29,59#
+0020:
+37,20,64,30,09#
+0025: End
+
+Program 5.1 -- Test ALU Ops
+0000:
+90,B6,F8,29,A6,E0,64,00,E6,3F,09,6C,64,37,0D,F8,60#
+0011:
+A6,E0,64,01,3F,15,E6,6C,64,37,1A,E0,64,02,E6,3F,20#
+0022:
+6C,64,37,24,26,26,46,C4,C4,26,56,64,7A,CA,00,20,7B#
+0033:
+30,20#
+0035: End
+
+Program 5.1a -- Test ALU Ops
+0000:
+90,B6,F8,29,A6,E0,64,00,E6,3F,09,6C,64,37,0D,F8,60#
+0011:
+A6,E0,64,01,3F,15,E6,6C,64,37,1A,E0,64,02,E6,3F,20#
+0022:
+6C,64,37,24,26,26,46,C4,C4,26,56,64,7A,CA,00,20,7B#
+0033:
+30,20#
+0035: End
+
+Program 5.1b -- Test ALU Ops and show DF
+0000:
+90,B6,F8,29,A6,E0,64,00,E6,3F,09,6C,64,37,0D,F8,60#
+0011:
+A6,E0,64,01,3F,15,E6,6C,64,37,1A,E0,64,02,E6,3F,20#
+0022:
+6C,64,37,24,26,26,46,C4,C4,26,56,64,7A,CB,00,20,7B#
+0033:
+30,20#
+0035: End
+
+Program 6.1 -- Test Control Instructions
+0000:
+90,B1,B2,B3,B4,F8,42,A1,F8,46,A4,F8,3E,A2,F8,1B#
+0010:
+A3,E3,3F,12,6C,65,37,16,F8,3A,A3,C4,7B,A5,64,C4#
+0020:
+3F,20,F0,73,7A,E2,64,37,27,64,3F,2A,85,52,64,37,2F#
+0031:
+E3,64,C4,30,0B,7B,30,0B,00,24,33,FF,22,EE,DD,BB#
+0041:
+00,F8,11,30,1D,F8,44,30,1D#
+004A: End
+
+Program 7.1a - Test DMA
+0000:
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,71,23,69#
+0010:
+90,22,52,64,30,10#
+0016: End
+
+Program 7.1b - Verticle Bars
+0000:
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,71,23,69#
+0010:
+F8,80,A0,30,10#
+0015: End
+
+Program 7.2 - TV Display Driver
+0000:
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,71,23,69#
+0010:
+34,10,F8,14,3C,14,FF,02,34,16,FE,33,12,93,B0,30,24#
+0021: Skip next 3 bytes
+21,22,23#
+0024:
+3C,24,F8,C8,34,28,A0,A0,B7,F8,0B,A7#
+0030:
+97,A0,27,97,A0,A0,87,3A,32,80,3C,2A,A0,34,3C,30,24#
+0041: End
+
+
+Program 7.3 - Seconds Clock (for Simulated Video)
+0000:
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,71,23,69#
+0010:
+34,10,F8,14,3C,14,FF,02,34,16,FE,33,12,93,B0,30,24#
+0021: Skip next 3 bytes
+21,22,23#
+0024:
+3C,24,F8,C8,34,28,A0,A0,B7,F8,0B,A7#
+0030:
+97,A0,27,97,A0,A0,87,3A,32,80,3C,2A,A0,34,3C,90#
+
+0040: counter at 0049 changed from 61(3D) to 27(1B)
+B7,F8,C7,A7,07,FC,01,57,FF,1B,3B,24,E7,73,F0,FC,03#
+
+0051:
+57,3B,69,F8,E2,73,F0,FC,03,57,FC,0C,3B,62,F8,E2#
+0061:
+57,F8,C8,30,6B,F8,C6,A7,F8,CC,A0,47,FC,AC,A7#
+0070:
+47,52,E2,F0,FE,52,75,50,10,80,FA,03,3A,73,10,10#
+0080:
+10,10,F0,3A,73,80,FF,F8,3B,70,32,66,30,24,DA,AA#
+0090:
+DF,D9,DD,8F,9E,DB,8F,9E,DE,9F,EA,A8,EF,8B,9E,9F#
+00A0:
+CB,9A,DF,8E,DB,BF,DA,DA,DF,DA,CE,DF#
+00AC:
+... Must initialize these three bytes at 00C5!
+00C5:
+E2,E2,00#
+00C8:  
+... Buffer
+
+Program 7.4a - Count Blinks per Minute
+...Change NOP (C4) at 000F to INP 1 (69) and compare
+0000: 
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,71,23,C4#
+0010:
+30,AC,12,42,F6,42,B7,42,A7,42,70,C4,22,78,22,73#
+0020:
+87,73,97,73,7E,73,F8,C8,34,28,A0,A0,B7,F8,0B,A7#
+0030:
+97,A0,27,97,A0,A0,87,3A,32,80,3C,2A,A0,34,3C,90#
+
+0040: counter at 0049 changed from 61(3D) to 27(1B)
+B7,F8,C7,A7,07,FC,01,57,FF,1B,3B,24,E7,73,F0,FC,03#
+
+0051:
+57,3B,69,F8,E2,73,F0,FC,03,57,FC,0C,3B,62,F8,E2#
+0061:
+57,F8,C8,30,6B,F8,C6,A7,F8,CC,A0,47,FC,AC,A7#
+0070:
+47,52,E2,F0,FE,52,75,50,10,80,FA,03,3A,73,10,10#
+0080:
+10,10,F0,3A,73,80,FF,F8,3B,70,32,66,30,24,DA,AA#
+0090:
+DF,D9,DD,8F,9E,DB,8F,9E,DE,9F,EA,A8,EF,8B,9E,9F#
+00A0:
+CB,9A,DF,8E,DB,BF,DA,DA,DF,DA,CE,DF,17,97,7A,3A,AC#
+00B1:
+7B,30,AC#
+
+... Must initialize these three bytes at 00C5!
+00C5:
+E2,E2,00#
+00C8:  
+... Buffer
+
+
+Program 7.4b - Test Interrupts
+0000:
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,70,23,69#
+0010:
+30,AC,12,42,F6,42,B7,42,A7,42,70,C4,22,78,22,73#
+0020:
+87,73,97,73,7E,73,F8,C8,34,28,A0,A0,B7,F8,0B,A7#
+0030:
+97,A0,27,97,A0,A0,87,3A,32,80,3C,2A,A0,34,3C,90#
+0040: counter at 0049 changed from 61(3D) to 27(1B)
+B7,F8,C7,A7,07,FC,01,57,FF,1B,3B,12,E7,73,F0,FC,03#
+0051:
+57,3B,69,F8,E2,73,F0,FC,03,57,FC,0C,3B,62,F8,E2#
+0061:
+57,F8,C8,30,6B,F8,C6,A7,F8,CC,A0,47,FC,AC,A7#
+0070:
+47,52,E2,F0,FE,52,75,50,10,80,FA,03,3A,73,10,10#
+0080:
+10,10,F0,3A,73,80,FF,F8,3B,70,32,66,30,12,DA,AA#
+0090:
+DF,D9,DD,8F,9E,DB,8F,9E,DE,9F,EA,A8,EF,8B,9E,9F#
+00A0:
+CB,9A,DF,8E,DB,BF,DA,DA,DF,DA,CE,DF,17,97,7A,3A,AC#
+00B1:
+7B,30,AC#
+... Must initialize these three bytes at 00C5!
+00C5:
+E2,E2,00#
+00C8:  
+... Buffer
+
+Program 7.5 - Mini-Diagnostic
+0000:
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,70,23,69#
+0010:
+30,AC,12,42,F6,42,B7,42,A7,42,70,C4,22,78,22,73#
+0020:
+87,73,97,73,7E,73,F8,C8,34,28,A0,A0,B7,F8,0B,A7#
+0030:
+97,A0,27,97,A0,A0,87,3A,32,80,3C,2A,A0,34,3C,90#
+0040: counter at 0049 changed from 61(3D) to 27(1B)
+B7,F8,C7,A7,07,FC,01,57,FF,1B,3B,12,E7,73,F0,FC,03#
+0051:
+57,3B,69,F8,E2,73,F0,FC,03,57,FC,0C,3B,62,F8,E2#
+0061:
+57,F8,C8,30,6B,F8,C6,A7,F8,CC,A0,47,FC,AC,A7#
+0070:
+47,52,E2,F0,FE,52,75,50,10,80,FA,03,3A,73,10,10#
+0080:
+10,10,F0,3A,73,80,FF,F8,3B,70,32,66,30,12,DA,AA#
+0090:
+DF,D9,DD,8F,9E,DB,8F,9E,DE,9F,EA,A8,EF,8B,9E,9F#
+00A0:
+CB,9A,DF,8E,DB,BF,DA,DA,DF,DA,CE,DF,E7,A7,3B,B1#
+00B0:
+17,60,7C,01,3A,B1,E2,87,22,52,64,32,BF,3F,BD,37,BF#
+00C1:
+6C,FE,30,AC,E2,E2,00#
+00C8:  
+... Buffer
+
+Program 7.5 - Mini-Diagnostic
+0000:
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,70,23,69#
+0010:
+30,AC,12,42,F6,42,B7,42,A7,42,70,C4,22,78,22,73#
+0020:
+87,73,97,73,7E,73,F8,C8,34,28,A0,A0,B7,F8,0B,A7#
+0030:
+97,A0,27,97,A0,A0,87,3A,32,80,3C,2A,A0,34,3C,90#
+0040: counter at 0049 changed from 61(3D) to 27(1B)
+B7,F8,C7,A7,07,FC,01,57,FF,1B,3B,12,E7,73,F0,FC,03#
+0051:
+57,3B,69,F8,E2,73,F0,FC,03,57,FC,0C,3B,62,F8,E2#
+0061:
+57,F8,C8,30,6B,F8,C6,A7,F8,CC,A0,47,FC,AC,A7#
+0070:
+47,52,E2,F0,FE,52,75,50,10,80,FA,03,3A,73,10,10#
+0080:
+10,10,F0,3A,73,80,FF,F8,3B,70,32,66,30,12,DA,AA#
+0090:
+DF,D9,DD,8F,9E,DB,8F,9E,DE,9F,EA,A8,EF,8B,9E,9F#
+00A0:
+CB,9A,DF,8E,DB,BF,DA,DA,DF,DA,CE,DF,E7,A7,3B,B1#
+00B0:
+17,60,7C,01,3A,B1,E2,87,22,52,64,32,BF,3F,BD,37,BF#
+00C1:
+6C,FE,30,AC,E2,E2,00#
+00C8: End  
+
+Program 7.6 - TV Digital Clock
+0000:
+90,B1,B2,B3,F8,1B,A1,F8,FF,A2,F8,0F,A3,70,23,69#
+0010:
+30,AC,12,42,F6,42,B7,42,A7,42,70,C4,22,78,22,73#
+0020:
+87,73,97,73,7E,73,F8,C8,34,28,A0,A0,B7,F8,0B,A7#
+0030:
+97,A0,27,97,A0,A0,87,3A,32,80,3C,2A,A0,34,3C,90#
+0040: counter at 0049 changed from 61(3D) to 27(1B)
+B7,F8,C7,A7,07,FC,01,57,FF,1B,3B,12,E7,73,F0,FC,03#
+0051:
+57,3B,69,F8,E2,73,F0,FC,03,57,FC,0C,3B,62,F8,E2#
+0061:
+57,F8,C8,30,6B,F8,C6,A7,F8,CC,A0,47,FC,AC,A7#
+0070:
+47,52,E2,F0,FE,52,75,50,10,80,FA,03,3A,73,10,10#
+0080:
+10,10,F0,3A,73,80,FF,F8,3B,70,32,66,30,12,DA,AA#
+0090:
+DF,D9,DD,8F,9E,DB,8F,9E,DE,9F,EA,A8,EF,8B,9E,9F#
+00A0:
+CB,9A,DF,8E,DB,BF,DA,DA,DF,DA,CE,DF,E7,A7,3B,B1#
+00B0:
+17,60,7C,01,3A,B1,E2,87,22,52,64,32,BF,3F,BD,37,BF#
+00C1:
+6C,FE,30,AC,E2,E2,00#
+00C8:  
+... Buffer
+00CC:
+... BRIT
+00F7:
+... BEND
+
+
+Other 1802 Programs from Popular Electronics
+
+Spaceship by Joseph Weisbecker
+0000: Start
+90,B1,B2,B3,B4,F8,2D,A3,F8,3F,A2,F8,11,A1,D3,72,70#
+
+0011: Interrupt
+22,78,22,52,C4,C4,C4,F8,00,B0,F8,00,A0#
+
+001E: Refresh
+80,E2,E2,20,A0,E2,20,A0,E2,20,A0,3C,1E,30,0F#
+
+002D: Main
+E2,69,3F,2F,6C,A4,37,33,3F,35,6C,54,14,30,33#
+
+003B: Padding before bitmap data
+00,00,00,00#
+
+0040: Spaceship Bitmap
+00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00#
+0050:
+7B,DE,DB,DE,00,00,00,00,4A,50,DA,52,00,00,00,00#
+0060:
+42,5E,AB,D0,00,00,00,00,4A,42,8A,52,00,00,00,00#
+0070:
+7B,DE,8A,5E,00,00,00,00,00,00,00,00,00,00,00,00#
+0080:
+00,00,00,00,00,00,07,E0,00,00,00,00,FF,FF,FF,FF#
+0090:
+00,06,00,01,00,00,00,01,00,7F,E0,01,00,00,00,02#
+00A0:
+7F,C0,3F,E0,FC,FF,FF,FE,40,0F,00,10,04,80,00,00#
+00B0:
+7F,C0,34,E0,04,80,00,00,00,3F,D0,40,04,80,00,00#
+00C0:
+00,0F,08,20,04,80,7A,1E,00,00,07,90,04,80,42,10#
+00D0:
+00,00,18,7F,FC,F0,72,1C,00,00,30,00,00,10,42,10#
+00E0:
+00,00,73,FC,00,10,7B,D0,00,00,30,00,3F,F0,00,00#
+00F0:
+00,00,18,0F,C0,00,00,00,00,00,07,F0,00,00,00,00#
+0100: End
+
+Pixie Animation by Edward C Deveaux
+
+0000:
+90,B1,B2,B3,B4,A4,F8,16,A1,F8,13,A2,F8,31,A3,D3#
+0010:
+01,02,03,00,72,70,22,78,22,52,15,C4,94,B0,84,A0#
+0020:
+80,80,80,E2,E2,20,A0,E2,20,A0,E2,20,A0,3C,22,30,14#
+0031:
+E2,69,3F,38,37,35,6C,85,F2,32,33,F8,00,B9,F8,78#
+0041:
+A9,F8,10,A6,99,BA,89,AA,F8,07,A7,09,B8,76,19,09#
+0051:
+76,59,27,87,3A,4F,98,76,5A,19,26,86,3A,45,30,33#
+0061:
+84,FC,08,A4,94,F8,00,B4,32,33,84,B4,30,33,00#
+
+0078: Image 0078 - 00F7
+00,00,00,00,00,00,00,00,00,00,00,00,00,00,07,E0#
+0088:
+00,00,00,00,FF,FF,FF,FF,00,06,00,01,00,00,00,01#
+0098:
+00,7F,E0,01,00,00,00,02,7F,C0,3F,E0,FC,FF,FF,FE#
+00A8:
+40,0F,00,10,04,80,00,00,7F,C0,34,E0,04,80,00,00#
+00B8:
+00,3F,D0,40,04,80,00,00,00,0F,08,20,04,80,7A,1E#
+00C8:
+00,00,07,90,04,80,42,10,00,00,18,7F,FC,F0,72,1C#
+00D8:
+00,00,30,00,00,10,42,10,00,00,73,FC,00,10,7B,D0#
+00E8:
+00,00,30,00,3F,F0,00,00,00,00,18,0F,C0,00,00,00#
+00F8: End
+
+ETOPS by Joseph Weisbecker
+
+To examine a memory location using ETOPS, set 01 into the toggles. Flip the RUN switch up and 01 will be displayed. Now set the address of the memory byte you want to examine into the toggles and push the INPUT switch. The next time you push the INPUT switch, you'll see the selected memory byte displayed. Keep pushing the INPUT switch to see the sequence of bytes stored in memory.
+
+To modify any memory location, set 02 into the toggles and turn the RUN switch up. 02 will appear. Set the address of the memory byte you want to modify (via the toggles).
+
+Push the INPUT switch and the Q light comes on. Now set the toggles to the value of the byte you want to place in the selected memory location and push the INPUT switch to store it in RAM. You can store a sequence of new bytes by setting each byte into the toggles and pushing the INPUT switch. The Q light warns that you are modifying memory.
+
+If you have the toggles set to 00 when you flip the RUN switch up, you can then set the toggles to the beginning address of a program you want to execute. Just push the INPUT switch to start executing your program at the selected address. Your program will begin execution with R3 as the program counter.
+
+0000:
+F8,20,A1,E1,6C,64,21,3F,07,37,09,32,1D,F6,33,11#
+0010:
+7B,6C,A1,3F,13,37,15,39,1A,6C,64,30,13,6C,A3,D3,00#
+0021: End
+
+Extended ETOPS by Mike Riley
+
+This program is an extension of the ETOPS program from Popular Electronics. This version allows for full 16-bit addresses.
+
+This program is used by first placing the desired function code on the switches and then placing the computer into run mode. At this point the computer will wait for the high portion of the address. Enter the high byte of the address on the switches and then press the IN button. Then the computer will wait for the low byte of the address. Again, enter this portion of the address on the switches and press the IN button. Then the program will perform the requested function:
+
+    00 - Run program. The program will execute with R0
+    01 - Examine Memory. This function allows you to examine memory, while the IN button is 	pressed, the data displays will show the next low address to be displayed. When the IN 		button is released, the data byte will be displayed.
+    02 - Modify Memory. This function allows you to enter bytes into memory. Like the 01 	function, while the IN button is pressed, the low address of the next address to be 		written will be displayed, when IN is released the toggles will be read and the value 		stored into memory. In this mode the Q led will be lit to remind you that you are in modify mode
+
+0000:
+90,B2,F8,3B,A2,E2,90,B3,F8,0C,A3,D3,6C,64,22,A1#
+0010:
+3F,10,37,12,6C,64,22,B0,3F,18,37,1A,6C,64,22,A0#
+0020:
+81,3A,24,D0,FF,01,32,29,7B,3F,29,80,52,64,22,37,2F#
+0031:
+39,35,6C,50,40,52,64,22,30,29,00#
+003C: End
+
+Programs for the Cosmac Elf Graphics by Paul Moews
+
+Program 1 - Display Routine (128 bytes)
+
+This program introduces an interrupt routine which displays 128 memory locations on the
+screen. Each bit is displayed as a rectangle twice as tall as it is wide; in order to get a square, two adjacent bits must be set.
+
+A counter is incremented between DMA bursts, and the number of similar DMA bursts can be
+made equal to 5 + 3N where N is any integer.  In this case n = 1 to give 8 identical sets of
+DMA bursts.
+
+Program 3 employs a similar routine with N = 9 to produce 32 identical DMA bursts. Note that
+the routine must not go across a page boundary and that the locations displayed are actually 7F
+through FE. The memory locations are, however, addressed individually as 00 through 7F in hexadecimal.
+
+The program has three modes depending on what is set in the switches on turning to run.
+
+If 01 is set, memory is examined, enter the address desired, (remember 00 to 7F) push the in button and the contents of that location will be displayed: successive pushes of the in button step through memory.
+
+If 02 is set memory locations are changed, enter the address desired, push the in button, then enter the new contents and push in again, successive pushes of the in button change successive memory locations.
+
+If CC is set the display area is cleared and the program automatically enters the input mode.
+
+0000:
+F8,4F,A1,F8,7E,A2,F8,09,A3,D3,E2,69,F8,02,BC,F8,7F,A5#
+0012:
+6C,64,22,FD,CC,3A,24,85,A4,F8,00,54,14,84,3A,1B,24,7B#
+0024:
+3F,24,37,26,F0,F6,33,2D,7B,6C,FA,7F,FC,7F,A4,3F,33,37,35#
+0037:
+84,FF,FF,3A,3E,85,A4,04,31,47,52,64,22,14,30,33,6C,64,22#
+004A:
+54,30,44,72,70,C4,22,78,22,52,9C,AF#
+0056:
+F8,7F,BF,91,B0,E2,9F,A0,E2,9F,A0#
+0061:
+2F,A0,8F,32,6A,9F,A0,30,5F,9F,A0,A0,9C,34,4D#
+0070:
+AF,80,BF,30,5F#
+0075: End Code
+...
+007E: Stack
+...
+007F: Display (Optional, can be typed in as program data)
+98,00,00,60,00,60,00,00,88,00,00,20,00,10,01,80#
+008F:
+F8,00,07,27,F8,18,01,80,00,00,1F,FE,DF,98,06,01#
+009F:
+F8,00,07,FF,FF,F0,18,06,08,00,00,74,FF,F7,F9,98#
+00AF:
+F8,00,1F,80,3F,9F,FF,E0,00,00,F5,FF,C0,7E,1E,60#
+00BF:
+F8,00,1F,80,3F,9F,FF,E0,A8,00,00,7F,FF,F7,F9,98#
+00CF:
+F8,00,07,FF,FF,F0,18,06,A8,00,1F,FE,DF,98,06,01#
+00DF:
+00,00,07,27,F8,18,01,80,88,00,00,20,00,10,01,80#
+00EF:
+88,00,00,60,00,60,00,00,F8,00,00,00,00,00,00,00#
+00FF: End
+
+Program 2 - Display Routine (64 byte)
+
+This program contains an interrupt routine which displays 64 memory locations on the screen.
+Each location is displayed as two adjacent squares, the screen is divided into 128 squares 
+(16 wide by8 high). Two sets of 64 locations are displayed so there are two displays which 
+appear alternately, each for about 0.5 seconds.
+
+The interrupt routine employs a counter similar to that used in program 1 except that the
+number of identical DMA bursts is 7 + 3N, where N is set to 3 to give 16 identical DMA
+cycles.
+
+The program has only two modes of operation.
+
+If CC is set in the switch register when run is turned on the displayed locations are erased, 
+otherwise they areltered. 
+
+Once the program is running the numbers entered are square identifiers.
+
+Enter a square identifier and push in, that square will be changed to its opposite value, 
+that is if it is off it will be turned on, if on it will be turned off.
+
+To see the picture, you can enter the square identifiers while program is running, or just
+enter the display data with the code.
+
+0000:
+F8,54,A1,F8,7E,A2,F8,09,A3,D3,E2,F8,04,BC,F8,7F,A5#
+0011:
+6C,64,22,FD,CC,3A,22,85,A4,F8,00,54,14,84,3A,1A,24#
+0022:
+69,3F,3E,37,25,6C,64,22,F6,FC,7F,A4,F0,F6#
+0030:
+3B,38,04,FB,0F,54,30,23,04,FB,F0,54,30,23,89,FD,40#
+0041:
+33,23,F8,00,A9,85,FB,BF,32,4D,FF,80,FC,7F,A5#
+0050:
+30,23,72,70,C4,22,78,22,52,9C,AF,85,BF,91,B0,9F,A0,19#
+0062:
+30,67,9F,A0,2F,A0,8F,32,6F,9F,A0,30,64,9F,A0#
+0071:
+A0,9C,34,52,AF,80,BF,30,67#
+007A: End Code
+...
+007E: Stack
+...
+007F: Display Data (Optional, bytes are created from typed in data)
+F0,0F,F0,00,FF,00,0F,F0,F0,F0,0F,0F,00,F0,F0,0F,F0#
+0090:
+F0,0F,0F,00,F0,00,0F,F0,0F,F0,0F,00,F0,0F,F0,F0#
+00A0:
+F0,0F,0F,00,F0,F0,00,F0,F0,0F,0F,00,F0,F0,00,F0#
+00B0:
+0F,F0,00,FF,00,FF,FF,00,00,00,00,00,00,00,00,FF#
+00C0:
+FF,F0,F0,00,0F,FF,FF,F0,00,00,F0,00,0F,00,00,F0#
+00D0:
+00,00,F0,00,0F,00,00,FF,FF,00,F0,00,0F,FF,F0,F0#
+00E0:
+00,00,F0,00,0F,00,00,F0,00,00,F0,00,0F,00,00,FF#
+00F0:
+FF,F0,FF,FF,0F,00,00,00,00,00,00,00,00,00,00,00#
+...
+00FF: End
+
+Program 2 Input: (Picture data typed in as Square Identifiers)
+00,03,04,08,09,0D,0E,10#
+12,15,17,1A,1C,1F,20,22#
+25,27,2A,2F,30,33,34,37#
+3A,3D,3E,40,42,45,47,4A#
+4C,50,52,55,57,5A,5C,60#
+63,64,68,69,6C,6D,6E,6F#
+80,81,82,83,84,86,8B,8C#
+8D,8E,8F,90,96,9B,A0,A6#
+AB,B0,B1,B2,B3,B6,BB,BC#
+BD,BE,C0,C6,CB,D0,D6,DB#
+E0,E1,E2,E3,E4,E6,E7,E8,E9,EB#
+
+Program 3 - Display Routine (32 bytes)
+
+The third interrupt routine displays 32 store locations on the screen. 
+Each location is displayed as a single square and the screen is divided
+into 32 squares (8 wide by 4 high). Four sets of 32 locations are 
+displayed so there are four displays which appear one after the other for
+about 0.5 seconds each.
+
+This program uses an interrupt routine like that of program 1 except that
+32 identical DMA bursts are produced.
+
+The program has the same modes of operation as program 2. 
+If CC is set in the switch register when run is turned on the displayed 
+locations are erased, otherwise they are unaltered. Once the program is
+running the numbers entered are square identifiers. 
+
+Enter a square identifier and push in, that square will be changed to its
+opposite value, that is if it is off it will be turned on, if on it will
+be turned off.
+
+
+To see the picture, you can enter the square identifiers while program is 
+running, or just enter the display data with the code. 
+
+0000:
+F8,4F,A1,F8,7E,A2,F8,09,A3,D3,E2,F8,0A,BC,F8,7F,A5#
+0011:
+6C,64,22,FD,CC,3A,22,85,A4,F8,00,54,14,84,3A,1A,24#
+0022:
+69,3F,36,37,25,6C,FA,7F,52,64,22,FC,7F,A4#
+0030: Counter at 0038 changed from 32(20) to 8(08)
+04,FB,FF,54,30,23,89,FD,20,33,23,F8,00,A9,85,FB,DF#
+0041:
+32,48,85,FC,20,30,4A,F8,7F,A5,30,23,72,70,C4#
+0050:
+22,78,22,52,9C,AF,19,85,BF,91,B0,9F,A0,E2,9F,A0#
+0060:
+2F, A0,8F,32,69,9F,A0,30,5E,9F,A0,A0,9C,34,4D,AF,80,BF,30,5E#
+0074: End Code
+...
+007E: Stack
+...
+007F: Display Data (Optional, bytes are created from typed in data)
+00,FF,FF,FF,FF,FF,00,00,FF,FF,00,FF,00,FF,FF,00,00#
+0090:
+FF,FF,00,FF,FF,00,00,00,FF,FF,FF,FF,FF,00,00,00#
+00A0: 
+FF,FF,FF,FF,FF,00,00,FF,FF,FF,FF,00,FF,FF,00,00#
+00B0:
+FF,FF,00,FF,FF,00,00,00,FF,FF,FF,FF,FF,00,00,00#
+00C0:
+FF,FF,FF,FF,FF,00,00,FF,FF,00,FF,00,FF,FF,00,00#
+00D0:
+FF,FF,00,FF,FF,00,00,00,FF,FF,FF,FF,FF,00,00,00#
+00E0:
+FF,FF,FF,FF,FF,00,00,FF,FF,00,FF,FF,FF,FF,00,00#
+00F0:
+FF,FF,00,FF,FF,00,00,00,FF,FF,FF,FF,FF,00,00,00#
+00FF: End
+
+Program 3 Input: (Picture data typed in as Square Identifiers)
+01,02,03,04,05,08,09,0B#
+0D,0E,11,12,14,15,19,1A#
+1B,1C,1D,21,22,23,24,25#
+28,29,2A,2B,2D,2E,31,32#
+34,35,39,3A,3B,3C,3D,41#
+42,43,44,45,48,49,4B,4D#
+4E,51,52,54,55,59,5A,5B#
+5C,5D,61,62,63,64,65,68#
+69,6B,6C,6D,6E,71,72,74#
+75,79,7A,7B,7C,7D#
+
+Program 4 - Variable Resolution Display Routine (48 bytes)
+
+This interrupt routine displays 48 memory locations with a variable number
+of DMA bursts. The first 8 locations are used in producing 108 identical DMA
+bursts which fill most of the television screen. The last 40 store locations
+are used in 5 groups of 8, each group of which is used to produce 4 DMA bursts.
+
+In these last 40 locations, therefore, each bit produces a square of the same
+size that it would produce if a one page interrupt routine were used. That is
+the last 40 locations produces a display 64 squares wide and 5 squares
+high. The first 8 locations produce 64 bars 27 times as high as they are wide.
+
+If the first 8 locations are set to 00 the top 27/32 of the screen will be blank
+while the bottom 5/32 becomes the display area.
+
+The program that uses this interrupt routine produces a "tickertape" display. 
+
+The material to be displayed is coded in 11 sets of 5 bytes. After loading the
+program switch to run and enter bytes 5 at a time through the switches. 
+
+When 5 bytes have been entered they are shifted into the tickertape display area and
+when all 11 sets have been entered the display area moves continuously.
+
+0000:
+F8,A5,A1,F8,3A,A2,F8,3C,A6,F8,A3,A4,F8,0F,A3,D3,E2#
+0011:
+69,7B,F8,05,AB,24,3F,17,37,19,6C,64,22,54,2B,8B#
+0021:
+3A,16,7A,D6,84,FB,6C,3A,12,F8,9E,A4,D6,84,FF,05#
+0031:
+A4,FB,67,3A,2D,30,2A,00,00,00,D3,F8,08,A7,F8,FF,A5#
+0042: Change counter at 4A from 06 to 02
+F8,05,A8,F8,00,A9,89,FB,06,3A,48,F8,08,AA,04,FE#
+0052:
+04,7E,54,05,7E,55,25,2A,8A,3A,55,28,88,14#
+0060: 
+3A,4D,84,FF,05,A4,27,87,32,3B,30,3F#
+006C: Data for Display
+...
+00A3:
+72,70,C4,22,78,22,52,F8,24,AF,19,F8,D0,BF#
+00B1:
+91,B0,9F,A0,E2,9F,A0,2F,A0,8F,32,C1,9F,A0,30,B6#
+00C1:
+80,E2,E2,20,A0,E2,20,A0,E2,20,A0,3C,C1,30,A3#
+00D0: Display locations for upper display (blank)
+00,00,00,00,00,00,00,00#
+00D8: End
+
+Program Data: COSMAC 'ELF' HURRAH
+
+F7,84,84,84,F7#
+BD,A1,BD,85,BD#
+B7,F4,57,14,14#
+BC,A0,A0,A0,BC#
+5E,50,1C,10,1E#
+87,84,87,84,F4#
+A2,22,03,02,02#
+52,52,D2,52,5E#
+F7,94,F7,A5,94#
+BD,A5,BD,25,A5#
+20,20,E0,20,20#
+
+Program 5 - Horse Race
+
+0000:
+F8,93,A1,F8,BE,A2,F8,09,A3,D3,F8,6C,A5,F8,77,A6#
+0010:
+F8,04,BC,F8,BF,A4,F8,00,54,14,84,3A,16,24,E2,69#
+0020:
+F8,10,AA,D6,F8,30,AB,D6,F8,50,AC,D6,F8,70,AD,D6#
+0030:
+D5,F8,62,A7,F8,1A,AE,88,F6,A4,E4,98,A4,B8,F6,A4#
+0040:
+98,F4,E7,FA,01,32,59,D5,8E,53,00,8E,FC,70,53,00#
+0050:
+F3,32,66,8E,FC,70,53,00,D6,8E,FB,1D,32,31,1E,17#
+0060:
+30,37,1F,3F,5F,7F,07,D6,D5,30,66,D3,F8,00,A9,89#
+0070:
+FB,08,3A,6F,30,6B,D3,BA,F6,FC,BF,A4,9A,F6,3B,86#
+0080:
+04,FB,0F,54,30,76,04,FB,F0,54,30,76,18,98,FF,01#
+0090:
+B8,72,70,C4,22,78,22,52,9C,AF,F8,BF,BF,91,B0,9F#
+00A0:
+A0,19,30,A7,9F,A0,2F,A0,8F,32,AF,9F,A0,30,A4,9F#
+00B0:
+A0,A0,9C,34,8C,AF,80,BF,30,A7#
+00BA: End Code
+... 
+00BD: Stack
+...
+00BF: Display data
+...
+00FE: End
+
+
+
+Program 6 - Pattern Generator
+
+To run the program put the additive shift in the
+switch byte and turn to run, the shift byte will be
+stored and displayed. Then enter the points to be
+displayed. Terminate entry with EE (entry is
+otherwise automatically terminated when 15
+points have been entered) and pattern generation
+begins. 
+
+It is suggested that a trial run be made with
+11 as the shift byte and 00, 01, 12, 23, and EE as
+the data points.
+
+0000:
+F8,86,A1,F8,AF,A2,F8,09,A3,D3,F8,04,BC,F8,5D,A5#
+0010:
+F8,B0,A6,F8,BF,A4,F8,00,AE,54,14,84,3A,16,24,E2#
+0020:
+69,6C,64,22,AD,3F,25,37,27,6C,64,22,FB,EE,32,3B#
+0030:
+F0,56,16,1E,8E,FB,0F,32,3B,30,25,F8,B0,A6,8E,A8#
+0040:
+06,FA,37,52,64,22,F8,00,A9,89,FB,20,3A,49,D5,8D#
+0050:
+E6,F4,56,E2,16,28,88,3A,40,30,3B,E2,D3,F8,04,AB#
+0060:
+F8,80,A7,E7,02,F3,BB,F6,FC,BF,A4,9B,F6,3B,75,04#
+0070:
+FB,0F,54,30,79,04,FB,F0,54,2B,17,8B,3A,64,30,5B#
+0080:
+00,0F,70,7F,72,70,C4,22,78,22,52,9C,AF,F8,BF,BF#
+0090:
+91,B0,9F,A0,19,30,9A,9F,A0,2F,A0,8F,32,A2,9F,A0#
+00A0:
+30,97,9F,A0,A0,9C,34,84,AF,80,BF,30,9A#
+00AD: End Code
+...
+00AF: Stack
+...
+00B0: Entered Data
+...
+00BF: Display Data
+...
+00FE: End
+
+Program 7 - Stop Watch
+
+On entry to the program the time is reset to
+zero (however the display is not cleared) and on
+pushing the in button the timer is started, a second
+push of the in button stops it, and a third push
+starts it again from where it left off. To reset the
+stop watch turn the run switch off and then on
+again. The maximum time that can be shown is 9
+hours, 59 minutes, and 59 seconds.
+
+0000:
+F8,7E,A1,F8,49,A2,F8,09,A3,D3,E2,F8,00,AE,AD,AC#
+0010:counter at 001F changed from 61(3D) to 27(1B)
+AB,AA,69,37,13,3F,15,37,17,F8,00,A9,30,4F,89,FB,1B#
+0021:
+37,13,3A,1E,A9,F8,3D,A5,F8,4A,A4,E4,F8,1A,A6#
+0030:
+86,53,00,FC,90,55,FF,20,53,00,F3,3A,4F,00,86,FB,1E#
+0041:
+32,4F,16,60,30,30,00,00,00,0A,06,0A,06,0A,F8,74,A6#
+0052:
+F8,8F,A7,87,FB,8A,32,1E,27,46,A4,87,53,00#
+0060:
+FC,A9,A5,05,A5,F8,05,A8,45,54,28,88,32,55,84,FC,08#
+0071:
+A4,30,68,D9,DB,DC,DE,DF,00,00,00,72,70,C4,22#
+0080:
+78,22,52,F8,24,AF,19,F8,D0,BF,91,B0,9F,A0,E2,9F#
+0090:
+A0,2F,A0,8F,32,9A,9F,A0,30,8F,80,E2,E2,20,A0,E2#
+00A0:
+20,A0,E2,20,A0,3C,9A,30,7C,B3,C6,BB,B9,CB,B7,BD#
+00B0:
+C5,BF,C1,F0,90,90,90,F0,80,F0,10,F0,10,F0,80,F0#
+00C0:
+90,F0,90,F0,10,F0,10,10,10,10,10,A0,A0,F0,20,20#
+00D0: Note D0-FF, are all zeros, except E2, E5, F2, F5 which are 20
+00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00#
+00E0:
+00,00,20,00,00,20,00,00,00,00,00,00,00,00,00,00#
+00F0:
+00,00,20,00,00,20,00,00,00,00,00,00,00,00,00,00#
+0100: End
+
+Program 8 - Twelve Hour clock
+
+The clock changes from 12:59:59 to 01:00:00 at 1:00 AM
+and 1:00 PM.
+
+To set the clock each digit is set individually. For
+example say we wish to set the time 12:03:48.
+First turn to run, then:
+set tens digit of hours (01) to switch byte, push in,
+set units digit of hours (02) to switch byte, push in,
+set tens digit of minutes (00) to switch byte, push in,
+set units digit of minutes (03) to switch byte, push in,
+set tens digit of seconds (04) to switch byte, push in,
+set units digit of seconds (08) to switch byte, push in,
+and finally to start clock,
+set 00 on switch byte, push in.
+
+0000:
+F8,8D,A1,F8,4D,A2,F8,09,A3,D3,E2,F8,1A,A4,F8,AF#
+0010:
+A5,85,54,3F,13,37,15,6C,64,22,00,85,FB,A9,32,23#
+0020:counter at 0026 changed from 61(3D) to 4(04)
+25,30,11,69,89,FB,04,3A,24,A9,F8,41,A5,F8,4E,A4#
+0030:
+E4,F8,1A,A6,86,53,00,FC,90,55,FF,20,53,00,F3,3A,54#
+0041:
+00,86,FB,1F,32,54,16,60,30,34,00,00,00,0A,06#
+0050:
+0A,06,0A,0A,8F,F6,3B,60,8E,FB,03,3A,60,AF,AE,1E#
+0060:
+F8,85,A6,F8,90,A7,87,FB,8A,32,24,27,46,A4,87,53#
+0070:
+00,FC,A9,A5,05,A5,F8,05,A8,45,54,28,88,32,66,84#
+0080:
+FC,08,A4,30,79,D8,D9,DB,DC,DE,DF,72,70,C4,22,78#
+0090:
+22,52,E2,E2,19,91,B0,F8,00,A0,80,E2,E2,20,A0,E2#
+00A0:
+20,A0,E2,20,A0,3C,9A,30,8B,B3,C6,BB,B9,CB,B7,BD#
+00B0:
+C5,BF,C1,F0,90,90,90,F0,80,F0,10,F0,10,F0,80,F0#
+00C0:
+90,F0,90,F0,10,F0,10,10,10,10,10,A0,A0,F0,20,20#
+00D0: Note D0-FF, are all zeros, except E2, E5, F2, F5 which are 20
+00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00#
+00E0:
+00,00,20,00,00,20,00,00,00,00,00,00,00,00,00,00#
+00F0:
+00,00,20,00,00,20,00,00,00,00,00,00,00,00,00,00#
+0100: End
