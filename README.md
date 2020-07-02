@@ -26,15 +26,15 @@ Here are some examples running actual [CDP1802 programs](https://github.com/four
 
 <table class="table table-hover table-striped table-bordered">
   <tr align="center">
-   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Spaceship.jpg"></td> 
-   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/DMATest.jpg"></td> 
+   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Spaceship.png"></td> 
+   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/DMATest.png"></td> 
   </tr>
   <tr align="center">
     <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Cosmac Elf Spaceship program.</td>
     <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Tom Pittman's DMA Test program.</td>
   </tr>
   <tr align="center">
-   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/SecondsClock.jpg"></td>   
+   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/SecondsClock.png"></td>   
    <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Text64x64.png"></td>  
   </tr>  
   <tr align="center">
@@ -42,7 +42,7 @@ Here are some examples running actual [CDP1802 programs](https://github.com/four
    <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Text Demo program.</td>
   </tr>
   <tr align="center">   
-   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/SpriteDemo.jpg"></td>
+   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/SpriteDemo.png"></td>
    <td> </td>
   </tr>
   <tr align="center">
@@ -50,7 +50,7 @@ Here are some examples running actual [CDP1802 programs](https://github.com/four
     <td> </td>
   </tr>
   <tr align="center">
-     <td colspan="2"><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Hardware.jpg"></td>
+     <td colspan="2"><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Hardware.png"></td>
   </tr>  
   <tr align="center">
     <td colspan="2">1802 Membership card, Teensy 3.2, 74LS374 Octal D Latch, OLED display and wiring.</td>
