@@ -47,7 +47,7 @@ Here are some examples running actual [CDP1802 programs](https://github.com/four
   </tr>
   <tr align="center">
     <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Sprite Demo program.</td>
-    <td>1802 Membership card, Teensy 3.2, 74LS374 Octal D Latch, OLED display and wiring.</td>
+    <td>1802 Membership card, Teensy 3.2, OLED display and wiring.</td>
   </tr>
   <tr align="center">
      <td colspan="2"><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Hardware.png"></td>
