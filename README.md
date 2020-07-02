@@ -35,7 +35,7 @@ Here are some examples running actual [CDP1802 programs](https://github.com/four
   </tr>
   <tr align="center">
    <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/SecondsClock.jpg"></td>   
-   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Text64x64.jpg"></td>  
+   <td><img src="https://github.com/fourstix/MCard1802TeensyPixieVideo/blob/master/pics/Text64x64.png"></td>  
   </tr>  
   <tr align="center">
    <td>Close up of SH1106 128x64 OLED display with 1802 Membership card running Tom Pittman's Seconds Clock program.</td>
